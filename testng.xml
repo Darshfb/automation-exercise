@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <parameter name="browserName" value=""/>
+    <test verbose="2" preserve-order="false" name="Automation Exercise">
+
+        <classes>
+            <class name="TC01_Home">
+                <methods>
+                    <include name="enterAuthPage"/>
+                </methods>
+            </class>
+            <class name="TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
