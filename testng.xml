@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <parameter name="browserName" value=""/>
+<suite name="All Test Suite" parallel="tests" thread-count="2">
     <test verbose="2" preserve-order="false" name="Automation Exercise">
-
+        <parameter name="browserName" value=""/>
         <classes>
-            <class name="TC01_Home">
+            <class name="testcases.TC01_Home">
                 <methods>
                     <include name="enterAuthPage"/>
                 </methods>
             </class>
-            <class name="TC02_Auth">
+            <class name="testcases.TC02_Auth">
                 <methods>
                     <include name="registerAuth"/>
                 </methods>
             </class>
-            <class name="TC03_Register">
+            <class name="testcases.TC03_Register">
                 <methods>
                     <include name="registerWithValidData"/>
                 </methods>
             </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="getUserName"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
+    <test verbose="2" preserve-order="false" name="Automation Exercise firefox">
+        <parameter name="browserName" value="firefox"/>
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="enterAuthPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="getUserName"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
 </suite>

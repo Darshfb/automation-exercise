@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +40,8 @@ public class DriverFactory
                 return new FirefoxDriver(firefoxOptions);
             case "edge":
                 return new EdgeDriver();
+            case "safari":
+                return new SafariDriver();
             default:
                 chromeOptions = new ChromeOptions();
                 // TODO: handle browsers options

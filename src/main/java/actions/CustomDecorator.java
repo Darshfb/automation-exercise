@@ -1,49 +1,46 @@
 package actions;
-
 import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.PageBase;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
 public class CustomDecorator implements WebElement {
     private final WebDriver driver;
     private final By element;
-    private final int waitTime;
 
-    public CustomDecorator(WebDriver driver, By element, int waitTime) {
+    public CustomDecorator(WebDriver driver, By element) {
         this.driver = driver;
         this.element = element;
-        this.waitTime = waitTime;
     }
 
-    private void setWait() {
-        try {
-            Thread.sleep(waitTime);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
+    // TODO: explicit wait until web element visibility
+    public static void explicitWait(WebDriver driver, By element) {
+        // explicit wait - to wait for the compose button to be click-able
+        PageBase.explicitWait(driver, element);
     }
 
     @Override
     public void click() {
         System.out.println("Clicking on element: " + element.toString());
-        setWait();
+//        explicitWait(driver, element);
         driver.findElement(element).click();
     }
 
     @Override
     public void submit() {
         System.out.println("Submitting on element: " + element.toString());
-        setWait();
         driver.findElement(element).submit();
     }
 
     @Override
     public void sendKeys(CharSequence... keysToSend) {
         System.out.println("Typing: " + Arrays.toString(keysToSend) + " on element: " + element.toString());
-        setWait();
         driver.findElement(element).sendKeys(keysToSend);
     }
 

@@ -1,8 +1,8 @@
 package pages;
 
 import actions.CustomDecorator;
-import common.PageBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -17,13 +17,13 @@ public class P03_SignupPage
         this.driver = driver;
     }
 
-    private final By genders = By.xpath("(//div)[@class='radio']");
+    private final By genders = By.xpath("(//div)/label/div");
     private final By passwordText = By.id("password");
+    private final By newsletter = By.xpath("((//input)[@type='checkbox'])[1]");
+    private final By checkbox = By.xpath("((//div)[@class='checkbox'])[2]");
     private final By day = By.id("days");
     private final By monthList = By.xpath("(//select)[@name='months']/option");
-    private final By month = By.id("months");
     private final By year = By.id("years");
-
     private final By addressFirstName = By.id("first_name");
     private final By addressLastName = By.id("last_name");
     private final By company = By.id("company");
@@ -35,14 +35,27 @@ public class P03_SignupPage
     private final By zipcode = By.id("zipcode");
     private final By phoneNumber = By.id("mobile_number");
     private final By registerButton = By.xpath("(//button)[@data-qa='create-account']");
-
+    private final By verifySignupPage = By.xpath("(//div)[@class='login-form']/h2");
     public P03_SignupPage selectGender(){
         List<WebElement> genderList = driver.findElements(genders);
+        System.out.println("The total gender list is " + genderList.size());
         PageBase.selectRandomElement(genderList).click();
         return this;
     }
     public P03_SignupPage enterPassword(String password) {
-        new CustomDecorator(driver, passwordText, 0).sendKeys(password);
+        new CustomDecorator(driver, passwordText).sendKeys(password);
+        return this;
+    }
+    public P03_SignupPage addNewsletter() {
+        WebElement element = driver.findElement(newsletter);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+//        new CustomDecorator(driver, newsletter, 3).click();
+        element.click();
+        return this;
+    }
+
+    public P03_SignupPage addCheckbox() {
+        new CustomDecorator(driver, checkbox).click();
         return this;
     }
     public P03_SignupPage selectDay(){
@@ -60,7 +73,7 @@ public class P03_SignupPage
 
         }else
         {
-            element.click();;
+            element.click();
         }
         return this;
     }
@@ -71,23 +84,23 @@ public class P03_SignupPage
         return this;
     }
     public P03_SignupPage enterAddressFirstName(String AddressFirstName){
-        new CustomDecorator(driver, addressFirstName, 0).sendKeys(AddressFirstName);
+        new CustomDecorator(driver, addressFirstName).sendKeys(AddressFirstName);
         return this;
     }
     public P03_SignupPage enterAddressLastName(String AddressLastName){
-        new CustomDecorator(driver, addressLastName, 0).sendKeys(AddressLastName);
+        new CustomDecorator(driver, addressLastName).sendKeys(AddressLastName);
         return this;
     }
     public P03_SignupPage enterCompany(String Company){
-        new CustomDecorator(driver, company, 0).sendKeys(Company);
+        new CustomDecorator(driver, company).sendKeys(Company);
         return this;
     }
     public P03_SignupPage enterAddress1(String Address1){
-        new CustomDecorator(driver, address1, 0).sendKeys(Address1);
+        new CustomDecorator(driver, address1).sendKeys(Address1);
         return this;
     }
     public P03_SignupPage enterAddress2(String Address2){
-        new CustomDecorator(driver, address2, 0).sendKeys(Address2);
+        new CustomDecorator(driver, address2).sendKeys(Address2);
         return this;
     }
     public P03_SignupPage selectCountry(){
@@ -97,26 +110,44 @@ public class P03_SignupPage
         return this;
     }
     public P03_SignupPage enterState(String State){
-        new CustomDecorator(driver, state, 0).sendKeys(State);
+        new CustomDecorator(driver, state).sendKeys(State);
         return this;
     }
     public P03_SignupPage enterCity(String City){
-        new CustomDecorator(driver, city, 0).sendKeys(City);
+        new CustomDecorator(driver, city).sendKeys(City);
         return this;
     }
     public P03_SignupPage enterZipcode(String Zipcode){
-        new CustomDecorator(driver, zipcode, 0).sendKeys(Zipcode);
+        new CustomDecorator(driver, zipcode).sendKeys(Zipcode);
         return this;
     }
     public P03_SignupPage enterPhoneNumber(String PhoneNumber){
-        new CustomDecorator(driver, phoneNumber, 0).sendKeys(PhoneNumber);
+        new CustomDecorator(driver, phoneNumber).sendKeys(PhoneNumber);
         return this;
     }
-    public void register(){
-        new CustomDecorator(driver, registerButton, 0).click();
+    public P03_SignupPage register(){
+        WebElement element = driver.findElement(registerButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
+        return this;
     }
 
+    public Boolean verifySignupPage(){
+        System.out.println("enter account " + driver.findElement(verifySignupPage).getText());
+        return driver.findElement(verifySignupPage).getText().equals("ENTER ACCOUNT INFORMATION");
+    }
 
+    By accountCreated = By.xpath("(//h2)[@data-qa='account-created']");
+    By continueButton = By.xpath("(//a)[@data-qa='continue-button']");
+
+    public Boolean verifyAccountCreated(){
+        System.out.println("account verified " + driver.findElement(accountCreated).getText());
+        return driver.findElement(accountCreated).getText().equals("ACCOUNT CREATED!");
+    }
+
+    public void continueToAccount(){
+        new CustomDecorator(driver, continueButton).click();
+    }
 
 }
 
