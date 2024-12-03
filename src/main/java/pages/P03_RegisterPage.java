@@ -9,10 +9,10 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class P03_SignupPage
+public class P03_RegisterPage
 {
     WebDriver driver;
-    public P03_SignupPage(WebDriver driver)
+    public P03_RegisterPage(WebDriver driver)
     {
         this.driver = driver;
     }
@@ -36,35 +36,34 @@ public class P03_SignupPage
     private final By phoneNumber = By.id("mobile_number");
     private final By registerButton = By.xpath("(//button)[@data-qa='create-account']");
     private final By verifySignupPage = By.xpath("(//div)[@class='login-form']/h2");
-    public P03_SignupPage selectGender(){
+    public P03_RegisterPage selectGender(){
         List<WebElement> genderList = driver.findElements(genders);
         System.out.println("The total gender list is " + genderList.size());
         PageBase.selectRandomElement(genderList).click();
         return this;
     }
-    public P03_SignupPage enterPassword(String password) {
+    public P03_RegisterPage enterPassword(String password) {
         new CustomDecorator(driver, passwordText).sendKeys(password);
         return this;
     }
-    public P03_SignupPage addNewsletter() {
+    public P03_RegisterPage addNewsletter() {
         WebElement element = driver.findElement(newsletter);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-//        new CustomDecorator(driver, newsletter, 3).click();
         element.click();
         return this;
     }
 
-    public P03_SignupPage addCheckbox() {
+    public P03_RegisterPage addCheckbox() {
         new CustomDecorator(driver, checkbox).click();
         return this;
     }
-    public P03_SignupPage selectDay(){
+    public P03_RegisterPage selectDay(){
         WebElement selectDay = driver.findElement(day);
         Select select = new Select(selectDay);
         select.selectByValue("25");
         return this;
     }
-    public P03_SignupPage selectMonth(){
+    public P03_RegisterPage selectMonth(){
         WebElement element = PageBase.selectRandomElement(driver.findElements(monthList));
         if(element.getText().equals("Month"))
         {
@@ -77,55 +76,55 @@ public class P03_SignupPage
         }
         return this;
     }
-    public P03_SignupPage selectYear(){
+    public P03_RegisterPage selectYear(){
         WebElement selectYear = driver.findElement(year);
         Select select = new Select(selectYear);
         select.selectByValue("1993");
         return this;
     }
-    public P03_SignupPage enterAddressFirstName(String AddressFirstName){
-        new CustomDecorator(driver, addressFirstName).sendKeys(AddressFirstName);
+    public P03_RegisterPage enterAddressFirstName(String firstName){
+        new CustomDecorator(driver, this.addressFirstName).sendKeys(firstName);
         return this;
     }
-    public P03_SignupPage enterAddressLastName(String AddressLastName){
-        new CustomDecorator(driver, addressLastName).sendKeys(AddressLastName);
+    public P03_RegisterPage enterAddressLastName(String lastName){
+        new CustomDecorator(driver, this.addressLastName).sendKeys(lastName);
         return this;
     }
-    public P03_SignupPage enterCompany(String Company){
+    public P03_RegisterPage enterCompany(String Company){
         new CustomDecorator(driver, company).sendKeys(Company);
         return this;
     }
-    public P03_SignupPage enterAddress1(String Address1){
+    public P03_RegisterPage enterAddress1(String Address1){
         new CustomDecorator(driver, address1).sendKeys(Address1);
         return this;
     }
-    public P03_SignupPage enterAddress2(String Address2){
+    public P03_RegisterPage enterAddress2(String Address2){
         new CustomDecorator(driver, address2).sendKeys(Address2);
         return this;
     }
-    public P03_SignupPage selectCountry(){
+    public P03_RegisterPage selectCountry(){
         WebElement selectCountry = driver.findElement(country);
         Select select = new Select(selectCountry);
         select.selectByValue("New Zealand");
         return this;
     }
-    public P03_SignupPage enterState(String State){
+    public P03_RegisterPage enterState(String State){
         new CustomDecorator(driver, state).sendKeys(State);
         return this;
     }
-    public P03_SignupPage enterCity(String City){
+    public P03_RegisterPage enterCity(String City){
         new CustomDecorator(driver, city).sendKeys(City);
         return this;
     }
-    public P03_SignupPage enterZipcode(String Zipcode){
+    public P03_RegisterPage enterZipcode(String Zipcode){
         new CustomDecorator(driver, zipcode).sendKeys(Zipcode);
         return this;
     }
-    public P03_SignupPage enterPhoneNumber(String PhoneNumber){
+    public P03_RegisterPage enterPhoneNumber(String PhoneNumber){
         new CustomDecorator(driver, phoneNumber).sendKeys(PhoneNumber);
         return this;
     }
-    public P03_SignupPage register(){
+    public P03_RegisterPage register(){
         WebElement element = driver.findElement(registerButton);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         element.click();

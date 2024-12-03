@@ -1,6 +1,6 @@
 package pages;
-
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -11,9 +11,42 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+import static org.junit.Assert.fail;
 
-public class PageBase
-{
+public class PageBase {
+
+    public static void waitForElement(WebDriver driver, By locator) {
+        try {
+            // Create WebDriverWait with the specified timeout
+            shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+            System.out.println("Element found: " + locator);
+        } catch (TimeoutException e) {
+            // Handle TimeoutException if the element was not found within the timeout period
+            fail("TimeoutException: Element not found within " + 10 + " seconds: " + locator);
+            e.printStackTrace();
+        } catch (NoSuchElementException e) {
+            // Handle NoSuchElementException if the element does not exist in the DOM
+            fail("NoSuchElementException: Element not found in the DOM: " + locator);
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Handle any other exceptions that might occur
+            fail("Exception occurred while waiting for the element: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void scrollToElement(WebDriver driver, By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        waitForElement(driver, locator);
+        js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(locator));
+    }
+
+    public static void scrollAndHoverToAnElement(WebDriver driver, By locator) {
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(locator)).perform();
+
+    }
 
     public static WebElement selectRandomElement(List<WebElement> elements) {
         Random random = new Random();
@@ -63,7 +96,7 @@ public class PageBase
 
     // TODO: handel fluent wait
     public static void fluentWaitHandling(WebDriver driver, By element) {
-        FluentWait<WebDriver> wait =  new FluentWait<>(driver)
+        FluentWait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(50))
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(Exception.class);

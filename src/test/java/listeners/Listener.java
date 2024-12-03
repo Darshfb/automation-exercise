@@ -57,15 +57,15 @@ public class Listener implements ITestListener
     }
 
     public void takeScreenshot() {
-        WebDriver driver = new ChromeDriver();
-        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-        Date currntDate = new Date();
-        String screenshotName = currntDate.toString().replace(" ", "-").replace(":", "-");
-        try {
-            FileHandler.copy(takesScreenshot.getScreenshotAs(OutputType.FILE), new File(System.getProperty("user.dir")
-                    + "/src/test/resources/Screenshots/" + screenshotName + ".png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        WebDriver driver = new ChromeDriver();
+//        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+//        Date currntDate = new Date();
+//        String screenshotName = currntDate.toString().replace(" ", "-").replace(":", "-");
+//        try {
+//            FileHandler.copy(takesScreenshot.getScreenshotAs(OutputType.FILE), new File(System.getProperty("user.dir")
+//                    + "/src/test/resources/Screenshots/" + screenshotName + ".png"));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

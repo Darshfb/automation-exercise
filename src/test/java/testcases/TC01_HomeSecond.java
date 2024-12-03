@@ -8,7 +8,7 @@ import static testcases.TC02_Auth.email;
 import static testcases.TC02_Auth.name;
 
 
-public class TC01_Home extends TestBase {
+public class TC01_HomeSecond extends TestBase {
     @Test(priority = 1)
     public void checkHomePage() {
         Assert.assertTrue(new P01_HomePage(driver).checkPage());

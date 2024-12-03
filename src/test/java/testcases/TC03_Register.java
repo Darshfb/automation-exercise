@@ -2,18 +2,20 @@ package testcases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.P03_SignupPage;
+import pages.P03_RegisterPage;
 
 
-public class TC03_Register extends TestBase {
-
-    @Test(priority = 3)
-    public void registerWithValidData() {
-        TC02_Auth.password = faker.internet().password();
-        Assert.assertTrue(new P03_SignupPage(driver).verifySignupPage());
-        boolean isAccountCreated = new P03_SignupPage(driver)
+public class TC03_Register extends TestBase
+{
+    static String password;
+    @Test(priority = 1)
+    public void registerWithValidData()
+    {
+        password = faker.internet().password();
+        Assert.assertTrue(new P03_RegisterPage(driver).verifySignupPage());
+        boolean isAccountCreated = new P03_RegisterPage(driver)
                 .selectGender()
-                .enterPassword(TC02_Auth.password)
+                .enterPassword(password)
                 .selectDay()
                 .selectMonth()
                 .selectYear()
@@ -33,6 +35,7 @@ public class TC03_Register extends TestBase {
                 .verifyAccountCreated();
         Assert.assertTrue(isAccountCreated);
 
-        new P03_SignupPage(driver).continueToAccount();
+        new P03_RegisterPage(driver).continueToAccount();
     }
+
 }

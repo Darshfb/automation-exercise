@@ -71,6 +71,7 @@ public class TestBase {
     @Parameters("browserName")
     @BeforeTest
     public void setupDriver(String browserName) {
+        System.out.println("browserName is " + browserName);
         setDriver(getNewInstance(browserName));
         driver = getDriver();
         driver.get(PROJECT_URL);

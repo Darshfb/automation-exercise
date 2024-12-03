@@ -27,6 +27,11 @@ public class DriverFactory
                 chromeOptions.addArguments("--remote-debugging-port=9222");
                 return new ChromeDriver(chromeOptions);
             case "firefox":
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
                 return new FirefoxDriver();
             case "firefox-headless":
                 FirefoxBinary firefoxBinary = new FirefoxBinary();
@@ -39,6 +44,11 @@ public class DriverFactory
                 firefoxOptions.addArguments("--disable-dev-shm-usage");
                 return new FirefoxDriver(firefoxOptions);
             case "edge":
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
                 return new EdgeDriver();
             case "safari":
                 return new SafariDriver();

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Authentication Suite" >
+
+    <parameter name="browserName" value="chrome"/>
+
+    <test preserve-order="false" name="Test Case 1: Register User">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterAuthPage"/>
+
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkUsernameIsVisibleAfterRegister"/>
+                    <include name="deleteAccountAndReturnBackToHomePage"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+    <test preserve-order="false" name="Test Case 2: Login User with correct email and password">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterAuthPage"/>
+
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkUsernameIsVisibleAfterRegister"/>
+                    <include name="logout"/>
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="loginAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkUsernameIsVisible"/>
+                    <include name="deleteAccountAndReturnBackToHomePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test preserve-order="false" name="Test Case 3: Login User with incorrect email and password">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterAuthPage"/>
+
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="enterIncorrectEmailAndPassword"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test preserve-order="false" name="Test Case 4: Logout User">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+
+                    <include name="enterAuthPage"/>
+
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="loginAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkUsernameIsVisible"/>
+                    <include name="logoutAfterLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test preserve-order="false" name="Test Case 5: Register User with existing email">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterAuthPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuthWithExistingEmail"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

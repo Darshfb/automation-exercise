@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Verify some elements in contact us page, all products, product details and subscription" >
+
+    <parameter name="browserName" value="chrome"/>
+
+    <test name="Test Case 6: Contact Us Form" preserve-order="false" >
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterContactUsPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC04_ContactUs">
+                <methods>
+                    <include name="contactUs"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 7: Verify Test Cases Page" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="checkTestCasesPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 8: Verify All Products and product detail page" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterProductsPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC05_Products">
+                <methods>
+                    <include name="checkAllProducts"/>
+                </methods>
+            </class>
+            <class name="testcases.TC06_ProductDetails">
+                <methods>
+                    <include name="checkProductDetailsVisible"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+    <test name="Test Case 9: Search Product" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterProductsPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC05_Products">
+                <methods>
+                    <include name="searchForProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 10: Verify Subscription in home page" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="sendSubscriptionEmail"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+    <test name="Test Case 11: Verify Subscription in Cart page" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterCartPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="sendSubscriptionEmail"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

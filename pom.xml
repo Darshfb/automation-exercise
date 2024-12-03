@@ -54,6 +54,10 @@
                             </property>
                         </systemProperties>
                         <argLine>--enable-preview</argLine>
+
+                        <parallel>suites</parallel>
+                        <threadCountSuites>2</threadCountSuites>
+                        <perCoreThreadCount>false</perCoreThreadCount>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -135,8 +139,9 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.24.0</version>
+            <version>4.26.0</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -210,7 +215,108 @@
         </dependency>
 
 
+
+
     </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>chrome</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/classic_page_object/*</exclude>
+                            </excludes>
+                            <systemPropertyVariables>
+                                <selenide.browser>chrome</selenide.browser>
+                                <selenide.headless>true</selenide.headless>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>ie</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <selenide.browser>internet explorer</selenide.browser>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>edge</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <selenide.browser>edge</selenide.browser>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>firefox</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/classic_page_object/*</exclude>
+                            </excludes>
+                            <systemPropertyVariables>
+                                <selenide.browser>firefox</selenide.browser>
+                                <selenide.headless>true</selenide.headless>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>safari</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/classic_page_object/*</exclude>
+                            </excludes>
+                            <systemPropertyVariables>
+                                <selenide.browser>safari</selenide.browser>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 
 </project>
