@@ -32,14 +32,12 @@ public class TC02_Auth extends TestBase {
         if(password == null)
             password = "Ab123456";
 
-        System.out.println("The email is " + email + " and password is " + password);
 
         Assert.assertTrue(new P02_AuthPage(driver).verifyLoginTextIsVisible());
         new P02_AuthPage(driver)
                 .enterLoginEmail(email)
                 .enterPassword(password)
                 .clickLoginButton();
-        System.out.println("The email is " + email + " and password is " + password);
     }
 
     String incorrectEmail = "admin@gmail.com";

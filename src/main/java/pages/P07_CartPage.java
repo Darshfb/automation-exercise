@@ -42,7 +42,6 @@ public class P07_CartPage {
     public Boolean checkListCartItemsNames() {
         waitForElement(driver, listCartItemNames);
         List<String> listItemsNames = driver.findElements(listCartItemNames).stream().map(WebElement::getText).collect(Collectors.toList());
-        System.out.println("listItemsNames in cart: " + listItemsNames + " listNames That i added: " + listNames);
         return listNames.equals(listItemsNames);
     }
 

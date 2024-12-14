@@ -48,11 +48,14 @@ public class P08_CheckoutPage {
     ) {
         shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(firstAndLastName));
         if (!driver.findElement(firstAndLastName).getText().equals(genderName + " " + firstNameAddress + " " + lastNameAddress)) {
+            System.out.println("mostafamahmoud" + driver.findElement(firstAndLastName).getText() + " " + genderName + " " + firstNameAddress + " " + lastNameAddress);
             return false;
         } else if (!driver.findElement(this.companyName).getText().equals(companyName))
         {
+            System.out.println("mostafamahmoud" + driver.findElement(this.companyName).getText() + " " + companyName);
             return false;
         } else if (!driver.findElement(this.streetAddressName).getText().equals(streetAddressName)) {
+            System.out.println("mostafamahmoud" + driver.findElement(this.streetAddressName).getText() + " " + streetAddressName);
             return false;
         } else if (!driver.findElement(this.secondStreetAddressName).getText().equals(secondStreetAddressName)) {
             return false;
