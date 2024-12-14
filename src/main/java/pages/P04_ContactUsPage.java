@@ -22,7 +22,6 @@ public class P04_ContactUsPage
     private final By getInTouchTitleText = By.xpath("//h2[normalize-space()='Get In Touch']");
 
     public Boolean verifyGetInTouchTitleText() {
-        System.out.println("Get in touch " + driver.findElement(getInTouchTitleText).getText());
         return driver.findElement(getInTouchTitleText).getText().equals("GET IN TOUCH");
     }
 

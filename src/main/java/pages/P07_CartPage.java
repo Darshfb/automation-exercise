@@ -4,14 +4,14 @@ import actions.CustomDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static pages.P05_ProductsPage.listNames;
 import static pages.P05_ProductsPage.listPrices;
-import static pages.PageBase.scrollToElement;
-import static pages.PageBase.waitForElement;
+import static pages.PageBase.*;
 
 public class P07_CartPage {
     private final WebDriver driver;
@@ -42,6 +42,7 @@ public class P07_CartPage {
     public Boolean checkListCartItemsNames() {
         waitForElement(driver, listCartItemNames);
         List<String> listItemsNames = driver.findElements(listCartItemNames).stream().map(WebElement::getText).collect(Collectors.toList());
+        System.out.println("listItemsNames in cart: " + listItemsNames + " listNames That i added: " + listNames);
         return listNames.equals(listItemsNames);
     }
 
@@ -55,7 +56,6 @@ public class P07_CartPage {
 
     public Boolean checkCartListQuantities(String itemQuantity) {
         List<WebElement> list = driver.findElements(cartListQuantities);
-        System.out.println(list.size());
         return list.stream().allMatch(element -> element.getText().equals(itemQuantity));
     }
 
@@ -65,7 +65,8 @@ public class P07_CartPage {
         return driver.findElement(itemQuantity).getText().equals(quantity);
     }
 
-    public Boolean verifyItemName(String name){
+    public Boolean verifyItemName(String name)
+    {
         return driver.findElements(listCartItemNames).get(0).getText().equals(name);
     }
 
@@ -83,4 +84,26 @@ public class P07_CartPage {
         waitForElement(driver, registerLoginButton);
         new CustomDecorator(driver, registerLoginButton).click();
     }
+
+    private By removeButton(String index){
+        return By.xpath("(//td[@class='cart_delete']/a)["+ index +"]");
+    }
+
+    public void removeItemFromCart(){
+        waitForElement(driver, removeButton("1"));
+        new CustomDecorator(driver, removeButton("1")).click();
+    }
+
+    private final By authButton = By.xpath("((//ul)[@class='nav navbar-nav']/li)[4]");
+    public void openAuthPage()
+    {
+        shortWait(driver).until(ExpectedConditions.elementToBeClickable(authButton));
+        new CustomDecorator(driver, authButton).click();
+    }
+
+    private final By shoppingCartText = By.xpath("//li[@class='active']");
+    public Boolean verifyThatCartPageDisplayed(){
+        return new CustomDecorator(driver, shoppingCartText).getText().equals("Shopping Cart");
+    }
+
 }

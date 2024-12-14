@@ -8,29 +8,51 @@ import pages.P03_RegisterPage;
 public class TC03_Register extends TestBase
 {
     static String password;
+    static String firstNameAddress;
+    static String lastNameAddress;
+    static String companyName;
+    static String streetAddressName;
+    static String secondStreetAddressName;
+    static String countryName;
+    static String phoneNumber;
+    static String cityName;
+    static String stateName;
+    static String postCode;
+    static String genderName;
     @Test(priority = 1)
     public void registerWithValidData()
     {
         password = faker.internet().password();
+        firstNameAddress = faker.address().firstName();
+        lastNameAddress = faker.address().lastName();
+        companyName = faker.company().name();
+        streetAddressName = faker.address().streetAddress();
+        secondStreetAddressName = faker.address().streetName();
+        countryName = "New Zealand";
+        phoneNumber = faker.phoneNumber().phoneNumber();
+        cityName = faker.address().city();
+        stateName = faker.address().state();
+        postCode = faker.address().zipCode();
+
         Assert.assertTrue(new P03_RegisterPage(driver).verifySignupPage());
-        boolean isAccountCreated = new P03_RegisterPage(driver)
-                .selectGender()
-                .enterPassword(password)
+        genderName = new P03_RegisterPage(driver).selectGender().getGenderName();
+
+        boolean isAccountCreated = new P03_RegisterPage(driver).enterPassword(password)
                 .selectDay()
                 .selectMonth()
                 .selectYear()
                 .addNewsletter()
                 .addCheckbox()
-                .enterAddressFirstName(faker.address().firstName())
-                .enterAddressLastName(faker.address().lastName())
-                .enterCompany(faker.company().name())
-                .enterAddress1(faker.address().streetAddress())
-                .enterAddress2(faker.address().secondaryAddress())
-                .selectCountry()
-                .enterState(faker.address().state())
-                .enterCity(faker.address().city())
-                .enterZipcode(faker.address().zipCode())
-                .enterPhoneNumber(faker.phoneNumber().phoneNumber())
+                .enterAddressFirstName(firstNameAddress)
+                .enterAddressLastName(lastNameAddress)
+                .enterCompany(companyName)
+                .enterAddress1(streetAddressName)
+                .enterAddress2(secondStreetAddressName)
+                .selectCountry(countryName)
+                .enterState(stateName)
+                .enterCity(cityName)
+                .enterZipcode(postCode)
+                .enterPhoneNumber(phoneNumber)
                 .register()
                 .verifyAccountCreated();
         Assert.assertTrue(isAccountCreated);

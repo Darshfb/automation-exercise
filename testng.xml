@@ -2,83 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <parameter name="browserName" value="chrome"/>
-
-        <test name="Test Case 12: Add Products in Cart" preserve-order="false">
-            <classes>
-                <class name="testcases.TC01_Home">
-                    <methods>
-                        <include name="checkHomePage"/>
-                        <include name="enterProductsPage"/>
-                    </methods>
-                </class>
-                <class name="testcases.TC05_Products">
-                    <methods>
-                        <include name="addFirstItemToCart"/>
-                    </methods>
-                </class>
-                <class name="testcases.TC07_Cart">
-                    <methods>
-                        <include name="checkListCartItemsNames"/>
-                    </methods>
-                </class>
-            </classes>
-        </test>
-
-        <test name="Test Case 13: Verify Product quantity in Cart" preserve-order="false">
-            <classes>
-                <class name="testcases.TC01_Home">
-                    <methods>
-                        <include name="checkHomePage"/>
-                        <include name="viewProductDetails"/>
-                    </methods>
-                </class>
-                <class name="testcases.TC06_ProductDetails">
-                    <methods>
-                        <include name="checkProductDetailsVisible"/>
-                        <include name="checkIt"/>
-                    </methods>
-                </class>
-                <class name="testcases.TC07_Cart">
-                    <methods>
-                        <include name="verifyItemNameAndQuantity"/>
-                    </methods>
-                </class>
-            </classes>
-        </test>
-
-
-    <test name=" Test Case 14: Place Order, Register while Checkout" preserve-order="true">
-        <classes>
-            <class name="testcases.TC01_Home">
-                <methods>
-                    <include name="checkHomePage"/>
-                    <include name="addItemsToCart"/>
-                    <include name="enterCartPage"/>
-                </methods>
-            </class>
-            <class name="testcases.TC07_Cart">
-                <methods>
-                    <include name="enterLoginRegisterPage"/>
-                </methods>
-            </class>
-            <class name="testcases.TC02_Auth">
-                <methods>
-                    <include name="registerAuth"/>
-                </methods>
-            </class>
-            <class name="testcases.TC03_Register">
-                <methods>
-                    <include name="registerWithValidData"/>
-                </methods>
-            </class>
-            <class name="testcases.TC01_Home">
-                <methods>
-                    <include name="checkUsernameIsVisibleAfterRegister"/>
-                    <include name="enterCartPage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
+    <suite-files>
+        <suite-file path="sprint1.xml"/>
+        <suite-file path="sprint2.xml"/>
+        <suite-file path="sprint3.xml"/>
+    </suite-files>
 
 </suite>

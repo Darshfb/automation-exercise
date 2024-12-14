@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="tests" thread-count="1">
+<suite name="All Test Suite" parallel="tests" thread-count="2">
 
     <test preserve-order="false" name="Automation Exercise with firefox">
         <parameter name="browserName" value="firefox"/>
         <classes>
             <class name="testcases.TC01_Home">
                 <methods>
+                    <include name="checkHomePage"/>
                     <include name="enterAuthPage"/>
+
                 </methods>
             </class>
             <class name="testcases.TC02_Auth">
@@ -22,7 +24,8 @@
             </class>
             <class name="testcases.TC01_Home">
                 <methods>
-                    <include name="getUserName"/>
+                    <include name="checkUsernameIsVisibleAfterRegister"/>
+                    <include name="deleteAccountAndReturnBackToHomePage"/>
                 </methods>
             </class>
 
@@ -34,7 +37,9 @@
         <classes>
             <class name="testcases.TC01_Home">
                 <methods>
+                    <include name="checkHomePage"/>
                     <include name="enterAuthPage"/>
+
                 </methods>
             </class>
             <class name="testcases.TC02_Auth">
@@ -49,12 +54,13 @@
             </class>
             <class name="testcases.TC01_Home">
                 <methods>
-                    <include name="getUserName"/>
+                    <include name="checkUsernameIsVisibleAfterRegister"/>
+                    <include name="deleteAccountAndReturnBackToHomePage"/>
                 </methods>
             </class>
 
         </classes>
-    </test>
 
+    </test>
 
 </suite>

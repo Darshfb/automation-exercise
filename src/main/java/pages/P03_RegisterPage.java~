@@ -43,6 +43,7 @@ public class P03_RegisterPage
 
     public P03_RegisterPage selectGender(){
         List<WebElement> genderList = driver.findElements(genders);
+        System.out.println("The total gender list is " + genderList.size());
         WebElement gender = PageBase.selectRandomElement(genderList);
         genderName = gender.getText();
         gender.click();
@@ -140,6 +141,7 @@ public class P03_RegisterPage
     }
 
     public Boolean verifySignupPage(){
+        System.out.println("enter account " + driver.findElement(verifySignupPage).getText());
         return driver.findElement(verifySignupPage).getText().equals("ENTER ACCOUNT INFORMATION");
     }
 
@@ -147,6 +149,7 @@ public class P03_RegisterPage
     By continueButton = By.xpath("(//a)[@data-qa='continue-button']");
 
     public Boolean verifyAccountCreated(){
+        System.out.println("account verified " + driver.findElement(accountCreated).getText());
         return driver.findElement(accountCreated).getText().equals("ACCOUNT CREATED!");
     }
 

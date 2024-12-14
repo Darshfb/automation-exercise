@@ -52,7 +52,47 @@ public class P06_productDetailsPage
     public String getProductName(){
         return driver.findElement(productName).getText();
     }
-//    public String getProductQuantity(){
-//        return driver.findElement(quantityInput).getText();
-//    }
+
+    private final By reviewText = By.xpath("(//li)[@class='active']/a");
+
+    public Boolean verifyReviewTextVisible(){
+        return driver.findElement(reviewText).getText().equals("WRITE YOUR REVIEW");
+    }
+
+    private final By name = By.id("name");
+    private final By email = By.id("email");
+    private final By reviewTextField = By.id("review");
+    private final By submitButton = By.id("button-review");
+
+    public P06_productDetailsPage enterName(String name){
+        waitForElement(driver, this.name);
+        new CustomDecorator(driver, this.name).sendKeys(name);
+        return this;
+    }
+
+    public P06_productDetailsPage enterEmail(String email){
+        waitForElement(driver, this.email);
+        new CustomDecorator(driver, this.email).sendKeys(email);
+        return this;
+    }
+
+    public P06_productDetailsPage enterReview(String review){
+        waitForElement(driver, this.reviewTextField);
+        new CustomDecorator(driver, this.reviewTextField).sendKeys(review);
+        return this;
+    }
+
+    public void submitReview(){
+        waitForElement(driver, this.submitButton);
+        new CustomDecorator(driver, this.submitButton).click();
+    }
+
+    private final By successReviewMsg = By.xpath("(//div)[@class='alert-success alert']/span");
+    public Boolean checkReviewSentSuccessfully()
+    {
+        waitForElement(driver, successReviewMsg);
+        String message = "Thank you for your review.";
+        return driver.findElement(successReviewMsg).getText().equals(message);
+    }
+
 }

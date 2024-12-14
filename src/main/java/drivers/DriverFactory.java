@@ -7,6 +7,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -15,10 +17,12 @@ import java.util.Map;
 
 public class DriverFactory
 {
-    public static WebDriver getNewInstance(String browserName) {
+    public static WebDriver getNewInstance(String browserName)
+    {
+        ChromeOptions chromeOptions;
         switch (browserName.toLowerCase()) {
             case "chrome-headless":
-                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--no-sandbox");
                 chromeOptions.addArguments("window-size=1920,1080");
@@ -27,12 +31,13 @@ public class DriverFactory
                 chromeOptions.addArguments("--remote-debugging-port=9222");
                 return new ChromeDriver(chromeOptions);
             case "firefox":
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
-                return new FirefoxDriver();
+                FirefoxProfile profile = new FirefoxProfile();
+                profile.setPreference("browser.download.folderList", 2);
+                profile.setPreference("browser.download.dir", System.getProperty("user.dir") + "\\sources");
+                profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream");
+                FirefoxOptions options = new FirefoxOptions();
+                options.setProfile(profile);
+                return new FirefoxDriver(options);
             case "firefox-headless":
                 FirefoxBinary firefoxBinary = new FirefoxBinary();
                 firefoxBinary.addCommandLineOptions("--headless");
@@ -44,32 +49,34 @@ public class DriverFactory
                 firefoxOptions.addArguments("--disable-dev-shm-usage");
                 return new FirefoxDriver(firefoxOptions);
             case "edge":
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
                 return new EdgeDriver();
             case "safari":
                 return new SafariDriver();
             default:
                 chromeOptions = new ChromeOptions();
                 // TODO: handle browsers options
-                Map<String, Object> prefs = new HashMap<String, Object>();
+                Map<String, Object> prefs = new HashMap<>();
                 prefs.put("credentials_enable_service", false);
                 prefs.put("profile.password_manager_enabled", false);
                 prefs.put("profile.default_content_setting_values.notifications", 2);
+                prefs.put("download.default_directory", System.getProperty("user.dir") + "\\sources");
+                prefs.put("download.prompt_for_download", false);  // Don't prompt for downloads
+                prefs.put("download.directory_upgrade", true);     // Allow download location upgrades
+                prefs.put("safebrowsing.enabled", true);
+                chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                chromeOptions.setExperimentalOption("prefs", prefs);
+                chromeOptions.addArguments("download.default_directory=" + System.getProperty("user.dir") + "\\sources");
+                chromeOptions.addArguments("--disable-extensions");// Disable safe browsing to allow all downloads
+//                chromeOptions.addArguments("--incognito");
                 chromeOptions.addArguments("start-maximized");
-                chromeOptions.addArguments("--incognito");
                 chromeOptions.addArguments("--disable-web-security");
                 chromeOptions.addArguments("--no-proxy-server");
                 chromeOptions.addArguments("--remote-allow-origins=*");
                 chromeOptions.addArguments("--disable-notifications");
-                chromeOptions.setExperimentalOption("prefs", prefs);
-                chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                capabilities.setCapability(CapabilityType.ENABLE_DOWNLOADS, true);
+
                 chromeOptions.merge(capabilities);
 
                 return new ChromeDriver(chromeOptions);

@@ -88,8 +88,6 @@ public class P02_AuthPage {
     public Boolean checkNewUserSignUp() {
         String text = "New User Signup!";
         shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(verityAuthPage));
-//        return driver.findElement(verityAuthPage).getText().equals("New User Signup!");
-        System.out.println(driver.findElement(verityAuthPage).getText() + " " + text);
         return driver.findElement(verityAuthPage).getText().contains("New User Signup!");
     }
 

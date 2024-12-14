@@ -18,7 +18,7 @@ public class PageBase {
     public static void waitForElement(WebDriver driver, By locator) {
         try {
             // Create WebDriverWait with the specified timeout
-            shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(locator));
+            longWait(driver).until(ExpectedConditions.visibilityOfElementLocated(locator));
 
             System.out.println("Element found: " + locator);
         } catch (TimeoutException e) {
@@ -42,10 +42,15 @@ public class PageBase {
         js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(locator));
     }
 
-    public static void scrollAndHoverToAnElement(WebDriver driver, By locator) {
+    public static void scrollAndHoverToAnElementByLocator(WebDriver driver, By locator) {
         final Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(locator)).perform();
-
+        longWait(driver).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    public static void scrollAndHoverToAnElementByWebElement(WebDriver driver, WebElement element) {
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        longWait(driver).until(ExpectedConditions.visibilityOf(element));
     }
 
     public static WebElement selectRandomElement(List<WebElement> elements) {

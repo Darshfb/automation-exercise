@@ -41,7 +41,7 @@
             </class>
             <class name="testcases.TC05_Products">
                 <methods>
-                    <include name="checkAllProducts"/>
+                    <include name="openFirstVIewProduct"/>
                 </methods>
             </class>
             <class name="testcases.TC06_ProductDetails">

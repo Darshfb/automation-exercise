@@ -5,11 +5,13 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -36,7 +38,10 @@ public class TestBase {
     static FileInputStream readProperty;
 
     @BeforeSuite
-    public void beforeSuite() throws Exception {
+    public void beforeSuite() throws Exception
+    {
+        File folder = new File(System.getProperty("user.dir") + "\\recordings");
+        FileUtils.cleanDirectory(folder);
         // TODO: initialize the HtmlReporter
         htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/testReport.html");
 
@@ -71,14 +76,14 @@ public class TestBase {
     @Parameters("browserName")
     @BeforeTest
     public void setupDriver(String browserName) {
-        System.out.println("browserName is " + browserName);
         setDriver(getNewInstance(browserName));
         driver = getDriver();
         driver.get(PROJECT_URL);
     }
 
     @AfterTest
-    public void tearDown() {
+    public void tearDown()
+    {
         quitBrowser(driver);
     }
 

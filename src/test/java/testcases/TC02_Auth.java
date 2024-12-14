@@ -3,6 +3,8 @@ package testcases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.P02_AuthPage;
+import pages.P05_ProductsPage;
+import pages.P07_CartPage;
 
 import static testcases.TC03_Register.password;
 
@@ -71,7 +73,11 @@ public class TC02_Auth extends TestBase {
                 .clickSignUpButton();
 
         Assert.assertTrue(new P02_AuthPage(driver).verifySignupErrorMsg());
+    }
 
-
+    @Test(priority = 4)
+    public void enterCartAgainAndCheckVisibilityOfItems(){
+        new P05_ProductsPage(driver).enterCartPage();
+        Assert.assertTrue(new P07_CartPage(driver).checkListCartItemsNames(), "All Products Names aren't the same");
     }
 }

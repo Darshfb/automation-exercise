@@ -90,4 +90,55 @@ public class TC01_Home extends TestBase {
     public void addItemsToCart(){
         new P01_HomePage(driver).addItemsToCart("1").addItemsToCart("2");
     }
+
+    @Test
+    public void verifyVisibilityCategorySideBar(){
+        Assert.assertTrue(new P01_HomePage(driver).checkCategorySideBarVisible());
+    }
+
+    @Test
+    public void selectWomenCategory(){
+        new P01_HomePage(driver).selectCategory("1");
+    }
+
+    static String subCategoryName;
+    @Test
+    public void selectWomenSubCategory(){
+        subCategoryName =  new P01_HomePage(driver).selectWomenSubCategory().getSubCategoryName();
+    }
+
+    @Test
+    public void checkRecommendItems()
+    {
+        Assert.assertTrue(new P01_HomePage(driver).verifyRecommendedItemsVisible());
+    }
+
+    static String itemName = "";
+    @Test
+    public void selectRecommendedItemAndViewCart()
+    {
+        itemName = new P01_HomePage(driver).selectRandomRecommendedItem().clickViewCart().getItemName();
+    }
+
+    @Test(priority = 2)
+    public void verifyUserAfterRegisterAndAddItemToCartThenEnterCart()
+    {
+        checkUsernameIsVisibleAfterRegister();
+        new P01_HomePage(driver).addItemsToCart("1").addItemsToCart("2").enterCartPage();
+    }
+
+    @Test
+    public void scrollDownToTheBottomOfThePageAndScrollUpWithArrowButton(){
+        Assert.assertTrue(new P01_HomePage(driver).scrollToTheBottomPage().verifySubscriptionTextVisible());
+        Assert.assertTrue(new P01_HomePage(driver).scrollUp().verifyBannerTextVisible());
+    }
+
+    @Test
+    public void scrollDownToTheBottomOfThePageAndScrollUpWithFunctionality(){
+        Assert.assertTrue(new P01_HomePage(driver).scrollToTheBottomPage().verifySubscriptionTextVisible());
+        Assert.assertTrue(new P01_HomePage(driver).scrollUpWithoutArrowButton().verifyBannerTextVisible());
+
+    }
+
+
 }

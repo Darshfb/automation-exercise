@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="All Test Suite">
+    <parameter name="browserName" value="chrome"/>
+
+    <test name="Test Case 12: Add Products in Cart" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterProductsPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC05_Products">
+                <methods>
+                    <include name="addFirstItemToCart"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="checkListCartItemsNames"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 13: Verify Product quantity in Cart" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="viewProductDetails"/>
+                </methods>
+            </class>
+            <class name="testcases.TC06_ProductDetails">
+                <methods>
+                    <include name="checkProductDetailsVisible"/>
+                    <include name="checkIt"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="verifyItemNameAndQuantity"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name=" Test Case 14: Place Order, Register while Checkout" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="addItemsToCart"/>
+                    <include name="enterCartPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="enterLoginRegisterPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TC08_Checkout">
+                <methods>
+                    <include name="enterCartPage"/>
+                    <include name="proceedToCheckout"/>
+                    <include name="checkAddressDetails"/>
+                    <include name="placeOrder"/>
+                </methods>
+            </class>
+            <class name="testcases.TC09_Payment">
+                <methods>
+                    <include name="payAndConfirmOrder"/>
+                    <include name="verifySuccessPaymentAndPlaceOrder"/>
+                    <include name="deleteAccountAndReturnBackToHomePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 15: Place Order, Register before Checkout" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterAuthPage"/>
+
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TC08_Checkout">
+                <methods>
+                    <include name="addItemsToCart"/>
+                    <include name="enterCartPage"/>
+                    <include name="proceedToCheckout"/>
+                    <include name="checkAddressDetails"/>
+                    <include name="placeOrder"/>
+                </methods>
+            </class>
+            <class name="testcases.TC09_Payment">
+                <methods>
+                    <include name="payAndConfirmOrder"/>
+                    <include name="verifySuccessPaymentAndPlaceOrder"/>
+                    <include name="deleteAccountAndReturnBackToHomePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 16: Place Order, Login before Checkout" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterAuthPage"/>
+
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="loginAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkUsernameIsVisible"/>
+                </methods>
+            </class>
+            <class name="testcases.TC08_Checkout">
+                <methods>
+                    <include name="addItemsToCart"/>
+                    <include name="enterCartPage"/>
+                    <include name="proceedToCheckout"/>
+                    <include name="placeOrder"/>
+                </methods>
+            </class>
+            <class name="testcases.TC09_Payment">
+                <methods>
+                    <include name="payAndConfirmOrder"/>
+                    <include name="verifySuccessPaymentAndPlaceOrder"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 17: Remove Products From Cart" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC08_Checkout">
+                <methods>
+                    <include name="addItemsToCart"/>
+                    <include name="enterCartPage"/>
+                    <include name="removeItemFromCart"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 18: View Category Products" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="verifyVisibilityCategorySideBar"/>
+                    <include name="selectWomenCategory"/>
+                    <include name="selectWomenSubCategory"/>
+                </methods>
+            </class>
+            <class name="testcases.TC10_CategoryProduct">
+                <methods>
+                    <include name="verifySelectedCategoryProducts"/>
+                    <include name="selectMenCategory"/>
+                    <include name="selectmenSubCategory"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 19: View and Cart Brand Products" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="enterProductsPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC05_Products">
+                <methods>
+                    <include name="verifyBrandsOnLeftSideBarVisible"/>
+                    <include name="selectRandomBrand"/>
+                    <include name="verifySelectedBrandAndProductsAreDisplayed"/>
+                    <include name="selectOtherBrandAndVerifyIt"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 20: Search Products and Verify Cart After Login" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="enterProductsPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC05_Products">
+                <methods>
+                    <include name="searchForProduct"/>
+                    <include name="addItemsToCart"/>
+                    <include name="enterCartPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="checkCartItemNamesList"/>
+                    <include name="openAuthPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="loginAuth"/>
+                    <include name="enterCartAgainAndCheckVisibilityOfItems"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 21: Add review on product" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="enterProductsPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC05_Products">
+                <methods>
+                    <include name="openFirstVIewProduct"/>
+                </methods>
+            </class>
+            <class name="testcases.TC06_ProductDetails">
+                <methods>
+                    <include name="checkProductDetailsVisible"/>
+                    <include name="submitReview"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 22: Add to cart from Recommended items" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkRecommendItems"/>
+                    <include name="selectRecommendedItemAndViewCart"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="verifyItemNameAfterAddedFromRecommendItems"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 23: Verify address details in checkout page" preserve-order="false">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="enterAuthPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="verifyUserAfterRegisterAndAddItemToCartThenEnterCart"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="checkCartIsDisplayed"/>
+                    <include name="proceedToCheckout"/>
+                </methods>
+            </class>
+            <class name="testcases.TC08_Checkout">
+                <methods>
+                    <include name="verifyAddressAndBillingAddress"/>
+                </methods>
+            </class>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="deleteAccountAndReturnBackToHomePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 24: Download Invoice after purchase order" preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="addItemsToCart"/>
+                    <include name="enterCartPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC07_Cart">
+                <methods>
+                    <include name="checkCartIsDisplayed"/>
+                    <include name="enterLoginRegisterPage"/>
+                </methods>
+            </class>
+            <class name="testcases.TC02_Auth">
+                <methods>
+                    <include name="registerAuth"/>
+                </methods>
+            </class>
+            <class name="testcases.TC03_Register">
+                <methods>
+                    <include name="registerWithValidData"/>
+                </methods>
+            </class>
+            <class name="testcases.TC08_Checkout">
+                <methods>
+                    <include name="enterCartPage"/>
+                    <include name="proceedToCheckout"/>
+                    <include name="checkAddressDetails"/>
+                    <include name="placeOrder"/>
+                </methods>
+            </class>
+            <class name="testcases.TC09_Payment">
+                <methods>
+                    <include name="payAndConfirmOrder"/>
+                    <include name="verifySuccessPaymentAndPlaceOrder"/>
+                    <include name="downloadInvoiceFile"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down functionality"
+          preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="scrollDownToTheBottomOfThePageAndScrollUpWithArrowButton"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality"
+          preserve-order="true">
+        <classes>
+            <class name="testcases.TC01_Home">
+                <methods>
+                    <include name="checkHomePage"/>
+                    <include name="scrollDownToTheBottomOfThePageAndScrollUpWithFunctionality"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

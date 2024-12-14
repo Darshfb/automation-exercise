@@ -24,6 +24,10 @@ public class CustomDecorator implements WebElement {
         // explicit wait - to wait for the compose button to be click-able
         PageBase.explicitWait(driver, element);
     }
+    // short explicit wait
+    public static WebDriverWait shortWait(WebDriver driver) {
+        return new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
 
     @Override
     public void click() {
@@ -35,23 +39,28 @@ public class CustomDecorator implements WebElement {
     @Override
     public void submit() {
         System.out.println("Submitting on element: " + element.toString());
+        shortWait(driver).until(ExpectedConditions.elementToBeClickable(element));
         driver.findElement(element).submit();
     }
 
     @Override
     public void sendKeys(CharSequence... keysToSend) {
         System.out.println("Typing: " + Arrays.toString(keysToSend) + " on element: " + element.toString());
+        shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(element));
         driver.findElement(element).sendKeys(keysToSend);
     }
 
     @Override
     public void clear() {
-
+        shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(element));
+        driver.findElement(element).clear();
     }
 
     @Override
-    public String getTagName() {
-        return "";
+    public String getTagName()
+    {
+        shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(element));
+        return driver.findElement(element).getTagName();
     }
 
     @Override
@@ -90,8 +99,10 @@ public class CustomDecorator implements WebElement {
     }
 
     @Override
-    public String getText() {
-        return "";
+    public String getText()
+    {
+        shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(element));
+        return driver.findElement(element).getText();
     }
 
     @Override
