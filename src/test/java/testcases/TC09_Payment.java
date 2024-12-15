@@ -1,5 +1,5 @@
 package testcases;
-import org.openqa.selenium.By;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.P01_HomePage;
@@ -29,7 +29,7 @@ public class TC09_Payment extends TestBase
         cvc = faker.number().digits(3);
         cardUserName = faker.name().fullName();
         expiryMonthDate = faker.number().digits(2);
-        expiryYearDate = String.valueOf(faker.number().digits(4).startsWith("20"));
+        expiryYearDate = "2027";
 
         new P09_PaymentPage(driver).enterNameOnCard(cardUserName)
                 .enterCardNumber(cardNumber)

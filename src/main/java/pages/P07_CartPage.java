@@ -23,6 +23,18 @@ public class P07_CartPage {
     private final By subscriptionTextField = By.xpath("//input[@id='susbscribe_email']");
     private final By subscriptionButton = By.id("subscribe");
     private final By subscriptionMessage = By.xpath("//div[@class='alert-success alert']");
+    private final By listCartItemNames = By.xpath("(//td)[@class='cart_description']/h4/a");
+    private final By listCartItemPrices = By.xpath("(//td)[@class='cart_price']/p");
+    private final By cartListQuantities = By.xpath("(//td)[@class='cart_quantity']/button");
+    private final By itemQuantity = By.xpath("((//td)[@class='cart_quantity']/button)[1]");
+    private final By proceedToCheckout = By.xpath("//a[@class='btn btn-default check_out']");
+    private final By registerLoginButton = By.xpath("//u[normalize-space()='Register / Login']");
+    private final By authButton = By.xpath("((//ul)[@class='nav navbar-nav']/li)[4]");
+    private final By shoppingCartText = By.xpath("//li[@class='active']");
+
+    private By removeFirstItem() {
+        return By.xpath("(//td[@class='cart_delete']/a)[" + "1" + "]");
+    }
 
     public void scrollToSubscriptionEmailAndSendEmail(String email) {
         scrollToElement(driver, subscriptionTextField);
@@ -36,9 +48,6 @@ public class P07_CartPage {
         return driver.findElement(subscriptionMessage).getText().equals(subscriptionText);
     }
 
-    private final By listCartItemNames = By.xpath("(//td)[@class='cart_description']/h4/a");
-    private final By listCartItemPrices = By.xpath("(//td)[@class='cart_price']/p");
-
     public Boolean checkListCartItemsNames() {
         waitForElement(driver, listCartItemNames);
         List<String> listItemsNames = driver.findElements(listCartItemNames).stream().map(WebElement::getText).collect(Collectors.toList());
@@ -51,58 +60,41 @@ public class P07_CartPage {
         return listPrices.equals(listCartPrices);
     }
 
-    private final By cartListQuantities = By.xpath("(//td)[@class='cart_quantity']/button");
-
     public Boolean checkCartListQuantities(String itemQuantity) {
         List<WebElement> list = driver.findElements(cartListQuantities);
         return list.stream().allMatch(element -> element.getText().equals(itemQuantity));
     }
 
-    private final By itemQuantity = By.xpath("((//td)[@class='cart_quantity']/button)[1]");
-    public Boolean verifyItemQuantity(String quantity)
-    {
+    public Boolean verifyItemQuantity(String quantity) {
         return driver.findElement(itemQuantity).getText().equals(quantity);
     }
 
-    public Boolean verifyItemName(String name)
-    {
+    public Boolean verifyItemName(String name) {
         return driver.findElements(listCartItemNames).get(0).getText().equals(name);
     }
 
-    private final By proceedToCheckout = By.xpath("//a[@class='btn btn-default check_out']");
-
-    public P07_CartPage clickProceedToCheckout(){
+    public P07_CartPage clickProceedToCheckout() {
         waitForElement(driver, proceedToCheckout);
         new CustomDecorator(driver, proceedToCheckout).click();
         return this;
     }
 
-    private final By registerLoginButton = By.xpath("//u[normalize-space()='Register / Login']");
-
-    public void clickRegisterLoginButton(){
+    public void clickRegisterLoginButton() {
         waitForElement(driver, registerLoginButton);
         new CustomDecorator(driver, registerLoginButton).click();
     }
 
-    private By removeButton(String index){
-        return By.xpath("(//td[@class='cart_delete']/a)["+ index +"]");
+    public void removeItemFromCart() {
+        waitForElement(driver, removeFirstItem());
+        new CustomDecorator(driver, removeFirstItem()).click();
     }
 
-    public void removeItemFromCart(){
-        waitForElement(driver, removeButton("1"));
-        new CustomDecorator(driver, removeButton("1")).click();
-    }
-
-    private final By authButton = By.xpath("((//ul)[@class='nav navbar-nav']/li)[4]");
-    public void openAuthPage()
-    {
+    public void openAuthPage() {
         shortWait(driver).until(ExpectedConditions.elementToBeClickable(authButton));
         new CustomDecorator(driver, authButton).click();
     }
 
-    private final By shoppingCartText = By.xpath("//li[@class='active']");
-    public Boolean verifyThatCartPageDisplayed(){
+    public Boolean verifyThatCartPageDisplayed() {
         return new CustomDecorator(driver, shoppingCartText).getText().equals("Shopping Cart");
     }
-
 }

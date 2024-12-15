@@ -21,14 +21,8 @@ public class P08_CheckoutPage {
     private final By cityNameAndStateNameAndZipCode = By.xpath("//ul[@id='address_delivery']//li[@class='address_city address_state_name address_postcode']");
     private final By countryName = By.xpath("//ul[@id='address_delivery']//li[@class='address_country_name']");
     private final By phoneNumber = By.xpath("//ul[@id='address_delivery']//li[@class='address_phone']");
-
-//    private final By firstAndLastName = By.xpath("((//ul)[@class='address alternate_item box']/li)[2]");
-//    private final By companyName = By.xpath("((//ul)[@class='address alternate_item box']/li)[3]");
-//    private final By streetAddressName = By.xpath("((//ul)[@class='address alternate_item box']/li)[4]");
-//    private final By secondStreetAddressName = By.xpath("((//ul)[@class='address alternate_item box']/li)[5]");
-//    private final By cityNameAndStateNameAndZipCode = By.xpath("//ul[@id='address_delivery']//li[@class='address_city address_state_name address_postcode']");
-//    private final By countryName = By.xpath("//ul[@id='address_delivery']//li[@class='address_country_name']");
-//    private final By phoneNumber = By.xpath("//ul[@id='address_delivery']//li[@class='address_phone']");
+    private final By commentTextField = By.name("message");
+    private final By placeOrderButton = By.xpath("//a[@class='btn btn-default check_out']");
 
     private By billingAddress(int index){
         return By.xpath("(//ul[@class='address alternate_item box']/li)[" + index + "]");
@@ -93,8 +87,6 @@ public class P08_CheckoutPage {
             return driver.findElement(this.billingAddress(8)).getText().equals(phoneNumber);
     }
 
-    private final By commentTextField = By.name("message");
-    private final By placeOrderButton = By.xpath("//a[@class='btn btn-default check_out']");
 
     public P08_CheckoutPage enterComment(String comment) {
         new CustomDecorator(driver, commentTextField).sendKeys(comment);

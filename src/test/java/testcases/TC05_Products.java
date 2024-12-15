@@ -23,8 +23,8 @@ public class TC05_Products extends TestBase
     @Test(priority = 3)
     public void addFirstItemToCart(){
         new P05_ProductsPage(driver)
-                .addItemToCart("1", false)
-                .addItemToCart("2", true);
+                .addItemToCartWithIndex("1", false)
+                .addItemToCartWithIndex("2", true);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class TC05_Products extends TestBase
     @Test
     public void selectRandomBrand(){
         new P05_ProductsPage(driver).selectBrand();
-        randomBrand = new P05_ProductsPage(driver).brandName;
+        randomBrand = new P05_ProductsPage(driver).getBrandName();
     }
 
     @Test

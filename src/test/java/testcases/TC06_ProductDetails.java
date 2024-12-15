@@ -8,7 +8,7 @@ public class TC06_ProductDetails extends TestBase {
 
     @Test(priority = 4)
     public void checkProductDetailsVisible() {
-        new P06_productDetailsPage(driver).checkProductDetailsVisible();
+        Assert.assertTrue(new P06_productDetailsPage(driver).checkProductDetailsVisible());
         Assert.assertTrue(new P06_productDetailsPage(driver).verifyReviewTextVisible());
     }
 

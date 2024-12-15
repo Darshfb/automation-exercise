@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="All Test Suite">
+<suite name="Test suite for products and cart and payment">
     <parameter name="browserName" value="chrome"/>
 
     <test name="Test Case 12: Add Products in Cart" preserve-order="false">
@@ -47,7 +47,7 @@
         </classes>
     </test>
 
-    <test name=" Test Case 14: Place Order, Register while Checkout" preserve-order="true">
+    <test name="Test Case 14: Place Order, Register while Checkout" preserve-order="true">
         <classes>
             <class name="testcases.TC01_Home">
                 <methods>

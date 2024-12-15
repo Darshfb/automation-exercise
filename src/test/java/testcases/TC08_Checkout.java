@@ -6,7 +6,6 @@ import pages.P01_HomePage;
 import pages.P07_CartPage;
 import pages.P08_CheckoutPage;
 
-import static testcases.TC02_Auth.name;
 import static testcases.TC03_Register.*;
 
 public class TC08_Checkout extends TestBase

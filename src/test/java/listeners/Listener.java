@@ -1,6 +1,7 @@
 package listeners;
 
 import common.MyScreenRecorder;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +11,12 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+
+import static drivers.DriverHolder.getDriver;
 
 public class Listener implements ITestListener
 {
@@ -26,7 +30,12 @@ public class Listener implements ITestListener
     @Override
     public void onTestFailure(ITestResult result) {
         // TODO: take screenshot on test failure
-        takeScreenshot();
+//        takeScreenshot();
+        WebDriver driver = getDriver();
+        if (driver instanceof TakesScreenshot) {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            Allure.addAttachment(result.getName(), new ByteArrayInputStream(screenshot));
+        }
     }
 
     @Override
@@ -57,7 +66,6 @@ public class Listener implements ITestListener
     }
 
     public void takeScreenshot() {
-//        WebDriver driver = new ChromeDriver();
 //        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
 //        Date currntDate = new Date();
 //        String screenshotName = currntDate.toString().replace(" ", "-").replace(":", "-");

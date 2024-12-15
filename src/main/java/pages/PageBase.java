@@ -1,4 +1,5 @@
 package pages;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+
 import static org.junit.Assert.fail;
 
 public class PageBase {
@@ -47,6 +49,7 @@ public class PageBase {
         actions.moveToElement(driver.findElement(locator)).perform();
         longWait(driver).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     public static void scrollAndHoverToAnElementByWebElement(WebDriver driver, WebElement element) {
         final Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
@@ -58,6 +61,14 @@ public class PageBase {
         int index = random.nextInt(elements.size());
         System.out.println("the index is " + index + " the size is " + elements.size());
         return elements.get(index);
+    }
+
+    public static void closeAds(WebDriver driver)
+    {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("const elements = document.getElementsByClassName('adsbygoogle adsbygoogle-noablate'); while (elements.length > 0) elements[0].remove()");
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("document.querySelector('.ad-close-button').click();");
     }
 
     public static void quitBrowser(WebDriver driver) {

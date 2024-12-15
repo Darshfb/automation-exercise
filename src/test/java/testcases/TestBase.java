@@ -1,10 +1,11 @@
 package testcases;
-import com.github.javafaker.Faker;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.github.javafaker.Faker;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
@@ -40,8 +41,8 @@ public class TestBase {
     @BeforeSuite
     public void beforeSuite() throws Exception
     {
-        File folder = new File(System.getProperty("user.dir") + "\\recordings");
-        FileUtils.cleanDirectory(folder);
+//        File folder = new File(System.getProperty("user.dir") + "\\recordings");
+//        FileUtils.cleanDirectory(folder);
         // TODO: initialize the HtmlReporter
         htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/testReport.html");
 

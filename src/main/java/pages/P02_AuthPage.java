@@ -23,6 +23,9 @@ public class P02_AuthPage {
     private final By signUpName = By.name("name");
     private final By SignUpButton = By.xpath("//button[@data-qa='signup-button']");
     private final By verityAuthPage = By.xpath("((//div)/h2)[3]");
+    private final By invalidLoginMSG = By.xpath("//p[normalize-space()='Your email or password is incorrect!']");
+    private final By loginText = By.xpath("//h2[normalize-space()='Login to your account']");
+    private final By signupErrorMsg = By.xpath("//p[normalize-space()='Email Address already exist!']");
 
     public P02_AuthPage enterLoginEmail(String email) {
         try {
@@ -48,14 +51,12 @@ public class P02_AuthPage {
         return this;
     }
 
-    private final By invalidLoginMSG = By.xpath("//p[normalize-space()='Your email or password is incorrect!']");
 
-    public void clickLoginButton()
-    {
+    public void clickLoginButton() {
         try {
             shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(loginButton));
             new CustomDecorator(driver, loginButton).click();
-        }catch (TimeoutException e){
+        } catch (TimeoutException e) {
             fail("login Button Element is not found");
             e.printStackTrace();
         }
@@ -64,6 +65,7 @@ public class P02_AuthPage {
     public Boolean verifyInvalidLoginMSG() {
         return driver.findElement(invalidLoginMSG).getText().equals("Your email or password is incorrect!");
     }
+
     public P02_AuthPage enterSignUpEmail(String email) {
         try {
             shortWait(driver).until(ExpectedConditions.visibilityOfElementLocated(signUpEmail));
@@ -91,15 +93,11 @@ public class P02_AuthPage {
         return driver.findElement(verityAuthPage).getText().contains("New User Signup!");
     }
 
-    private final By loginText = By.xpath("//h2[normalize-space()='Login to your account']");
-    public Boolean verifyLoginTextIsVisible()
-    {
+    public Boolean verifyLoginTextIsVisible() {
         return driver.findElement(loginText).getText().equals("Login to your account");
     }
 
-    private final By signupErrorMsg = By.xpath("//p[normalize-space()='Email Address already exist!']");
-    public Boolean verifySignupErrorMsg()
-    {
+    public Boolean verifySignupErrorMsg() {
         return driver.findElement(signupErrorMsg).getText().equals("Email Address already exist!");
     }
 }

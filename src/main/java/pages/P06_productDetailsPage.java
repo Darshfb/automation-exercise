@@ -2,14 +2,13 @@ package pages;
 
 import actions.CustomDecorator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import static pages.PageBase.waitForElement;
 
-public class P06_productDetailsPage
-{
+public class P06_productDetailsPage {
     private final WebDriver driver;
+
     public P06_productDetailsPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -20,9 +19,18 @@ public class P06_productDetailsPage
     private final By productAvailability = By.xpath("//div[@class='product-details']//p[2]");
     private final By productCondition = By.xpath("//body//section//p[3]");
     private final By productBrand = By.xpath("//body//section//p[4]");
+    private final By quantityInput = By.id("quantity");
+    private final By addToCartButton = By.xpath("//button[@type='button']");
+    private final By reviewText = By.xpath("(//li)[@class='active']/a");
+    private final By name = By.id("name");
+    private final By email = By.id("email");
+    private final By reviewTextField = By.id("review");
+    private final By submitButton = By.id("button-review");
+    private final By viewCartButton = By.xpath("//u[normalize-space()='View Cart']");
+    private final By successReviewMsg = By.xpath("(//div)[@class='alert-success alert']/span");
 
-    public Boolean checkProductDetailsVisible()
-    {
+    public Boolean checkProductDetailsVisible() {
+        waitForElement(driver, productName);
         return driver.findElement(productName).isDisplayed() &&
                 driver.findElement(productCategory).isDisplayed() &&
                 driver.findElement(productPrice).isDisplayed() &&
@@ -31,10 +39,8 @@ public class P06_productDetailsPage
                 driver.findElement(productBrand).isDisplayed();
     }
 
-    private final By quantityInput = By.id("quantity");
-    private final By addToCartButton = By.xpath("//button[@type='button']");
-    public P06_productDetailsPage addToCart(int quantity)
-    {
+
+    public P06_productDetailsPage addToCart(int quantity) {
         waitForElement(driver, quantityInput);
         driver.findElement(quantityInput).clear();
         new CustomDecorator(driver, quantityInput).sendKeys(Integer.toString(quantity));
@@ -42,54 +48,43 @@ public class P06_productDetailsPage
         return this;
     }
 
-    private final By viewCartButton = By.xpath("//u[normalize-space()='View Cart']");
-    public void goToCart()
-    {
+    public void goToCart() {
         waitForElement(driver, viewCartButton);
         new CustomDecorator(driver, viewCartButton).click();
     }
 
-    public String getProductName(){
+    public String getProductName() {
         return driver.findElement(productName).getText();
     }
 
-    private final By reviewText = By.xpath("(//li)[@class='active']/a");
-
-    public Boolean verifyReviewTextVisible(){
+    public Boolean verifyReviewTextVisible() {
         return driver.findElement(reviewText).getText().equals("WRITE YOUR REVIEW");
     }
 
-    private final By name = By.id("name");
-    private final By email = By.id("email");
-    private final By reviewTextField = By.id("review");
-    private final By submitButton = By.id("button-review");
-
-    public P06_productDetailsPage enterName(String name){
+    public P06_productDetailsPage enterName(String name) {
         waitForElement(driver, this.name);
         new CustomDecorator(driver, this.name).sendKeys(name);
         return this;
     }
 
-    public P06_productDetailsPage enterEmail(String email){
+    public P06_productDetailsPage enterEmail(String email) {
         waitForElement(driver, this.email);
         new CustomDecorator(driver, this.email).sendKeys(email);
         return this;
     }
 
-    public P06_productDetailsPage enterReview(String review){
+    public P06_productDetailsPage enterReview(String review) {
         waitForElement(driver, this.reviewTextField);
         new CustomDecorator(driver, this.reviewTextField).sendKeys(review);
         return this;
     }
 
-    public void submitReview(){
+    public void submitReview() {
         waitForElement(driver, this.submitButton);
         new CustomDecorator(driver, this.submitButton).click();
     }
 
-    private final By successReviewMsg = By.xpath("(//div)[@class='alert-success alert']/span");
-    public Boolean checkReviewSentSuccessfully()
-    {
+    public Boolean checkReviewSentSuccessfully() {
         waitForElement(driver, successReviewMsg);
         String message = "Thank you for your review.";
         return driver.findElement(successReviewMsg).getText().equals(message);

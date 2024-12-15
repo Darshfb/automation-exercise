@@ -63,11 +63,15 @@ public class DriverFactory
                 prefs.put("download.prompt_for_download", false);  // Don't prompt for downloads
                 prefs.put("download.directory_upgrade", true);     // Allow download location upgrades
                 prefs.put("safebrowsing.enabled", true);
+                prefs.put("autofill.profile_enabled", false); // Disable autofill
                 chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 chromeOptions.setExperimentalOption("prefs", prefs);
                 chromeOptions.addArguments("download.default_directory=" + System.getProperty("user.dir") + "\\sources");
                 chromeOptions.addArguments("--disable-extensions");// Disable safe browsing to allow all downloads
 //                chromeOptions.addArguments("--incognito");
+                chromeOptions.addArguments("--disable-features=Autofill,AutofillAddressPrediction,PasswordManager");
+                chromeOptions.addArguments("--disable-save-password-bubble");  // Disable save password bubble
+                chromeOptions.addArguments("--disable-autofill-popup");  // Disable the autofill popup for address
                 chromeOptions.addArguments("start-maximized");
                 chromeOptions.addArguments("--disable-web-security");
                 chromeOptions.addArguments("--no-proxy-server");

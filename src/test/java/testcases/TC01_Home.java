@@ -117,7 +117,7 @@ public class TC01_Home extends TestBase {
     @Test
     public void selectRecommendedItemAndViewCart()
     {
-        itemName = new P01_HomePage(driver).selectRandomRecommendedItem().clickViewCart().getItemName();
+        itemName =  new P01_HomePage(driver).selectRandomRecommendedItem().clickViewCart().getItemName();
     }
 
     @Test(priority = 2)
