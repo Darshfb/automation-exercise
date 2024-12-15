@@ -145,7 +145,6 @@ public class P05_ProductsPage {
         for (int i = 0; i < driver.findElements(listItems).size(); i++) {
             longWait(driver).until(ExpectedConditions.visibilityOf(driver.findElements(By.xpath("((//div)[@class='product-image-wrapper'])")).get(i)));
             scrollToElement(driver, By.xpath("((//div)[@class='features_items']/div[@class='col-sm-4'])["+ (i + 1)+"]"));
-            System.out.println("MMMMMMMMM " + By.xpath("((//div)[@class='features_items']/div[@class='col-sm-4'])["+ (i + 1)+"]"));
             scrollAndHoverToAnElementByWebElement(driver, driver.findElements(By.xpath("((//div)[@class='product-image-wrapper'])")).get(i));
 //            scrollAndHoverToAnElementByLocator(driver, addToCartLocator(i + 1));
 //            scrollToElement(driver, addItemToCart(String.valueOf(i + 1)));
